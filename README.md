@@ -11,16 +11,16 @@ to restore/save built dependencies between independent builds, not just jobs.
 ```yml
 steps:
   - plugins:
-    - danthorpe/cache#v1.0.0:
-        cache_key: "v1-cache-{{ checksum 'Podfile.lock' }}"
-        paths: [ "Pods/", "Rome/" ]
+      - danthorpe/cache#v1.0.0:
+          cache_key: "v1-cache-{{ checksum 'Podfile.lock' }}"
+          paths: ["Pods/", "Rome/"]
 ```
 
 ## Cache Key Templates
 
 The cache key is a string, which support a crude template system. Currently `checksum` is
 the only command supported for now. It can be used as in the example above. In this case
-the cache key will be determined by executing a _checksum_ (actually `shasum`) on the
+the cache key will be determined by executing a _checksum_ (actually `sha1sum`) on the
 `Podfile.lock` file, prepended with `v1-cache-`.
 
 ## S3 Storage
@@ -39,8 +39,8 @@ variables.
 
 ## Rsync Storage
 
-You can also use rsync to store your files using the ``rsync_storage`` config parameter.
-If this is set it will be used as the destination parameter of a ``rsync -az`` command.
+You can also use rsync to store your files using the `rsync_storage` config parameter.
+If this is set it will be used as the destination parameter of a `rsync -az` command.
 
 ```yml
 steps:
